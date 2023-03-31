@@ -8,14 +8,14 @@ def createTables():
 
 def addMovie():
     movieTitle = input("Please input movie title to add to DB: ")
-    conn.execute('INSERT INTO movies(title) VALUES (?)', (movieTitle))
+    conn.execute('INSERT INTO movies(title) VALUES (?)', (movieTitle,))
     conn.commit()
     print("Movie added to DB!")
 
 def addSeries():
     seriesTitle = input("Please input movie title to add to DB: ")
-    sve = input("Did you watch a season before?")
-    if sve == "yes":
+    sve = input("Did you watch a season before? [y]")
+    if sve == "y":
         snum = int(input("Which season?: [1-99] "))
         epinum = int(input("Which episode?: [1-99]"))
     else:
@@ -31,6 +31,12 @@ def getMovies():
     for row in movies:
         print(f'{row[0]} - {row[1]}')
 
+def getSeries():
+    series = conn.execute('SELECT * FROM series')
+    print("ID - Title - Season - Episode")
+    for row in series:
+        print(f'{row[0]} - {row[1]} - {row[2]} - {row[3]}')
+
 choice = 0
 createTables()
 while choice != "q":
@@ -38,7 +44,9 @@ while choice != "q":
     print("Add a movies [1]")
     print("Add a series [2]")
     print("Show movies to watch [3]")
+    print("Show movies to watch [4]")
     print("Quit [q]")
+    
     choice = input("What would you like to do?")
     if choice == "1":
         addMovie()
@@ -46,3 +54,5 @@ while choice != "q":
         addSeries()
     elif choice == "3":
         getMovies()
+    elif choice == "4":
+        getSeries()
