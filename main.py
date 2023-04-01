@@ -1,12 +1,11 @@
 import sqlite3
-import argparse
 
 conn = sqlite3.connect('Entertainment.db')
 
 def createTables():
-    conn.execute('''CREATE TABLE IF NOT EXISTS movies (id INTEGER PRIMARY KEY,title TEXT NOT NULL)''')
-    conn.execute('''CREATE TABLE IF NOT EXISTS series (id INTEGER PRIMARY KEY,title TEXT NOT NULL,season INTEGER NOT NULL, episode INTEGER NOT NULL)''')
-    conn.execute('''CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY,title TEXT NOT NULL, platform TEXT NOT NULL)''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS movies (id INTEGER PRIMARY KEY,title TEXT NOT NULL,status TEXT NOT NULL)''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS series (id INTEGER PRIMARY KEY,title TEXT NOT NULL,season INTEGER NOT NULL, episode INTEGER NOT NULL, status TEXT NOT NULL)''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY,title TEXT NOT NULL, platform TEXT NOT NULL, status TEXT NOT NULL)''')
 
 def addMovie():
     movieTitle = input("Please input movie title:  ")
