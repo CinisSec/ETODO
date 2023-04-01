@@ -9,7 +9,7 @@ def createTables():
 
 def addMovie():
     movieTitle = input("Please input movie title:  ")
-    conn.execute('INSERT INTO movies(title) VALUES (?)', (movieTitle,))
+    conn.execute('INSERT INTO movies(title, status) VALUES (?, ?)', (movieTitle,"TODO"))
     conn.commit()
     print("Movie added to DB!")
 
@@ -35,9 +35,9 @@ def addGame():
 
 def getMovies():
     movies = conn.execute('SELECT * FROM movies')
-    print("ID - Title")
+    print("ID - Title - Status")
     for row in movies:
-        print(f'{row[0]} - {row[1]}')
+        print(f'{row[0]} - {row[1]} - {row[2]}')
 
 def getSeries():
     series = conn.execute('SELECT * FROM series')
@@ -45,6 +45,8 @@ def getSeries():
     for row in series:
         print(f'{row[0]} - {row[1]} - {row[2]} - {row[3]}')
 
+
+#MAIN CODE SECTION START
 choice = 0
 createTables()
 while choice != "q":
@@ -64,3 +66,4 @@ while choice != "q":
         getMovies()
     elif choice == "4":
         getSeries()
+#MAIN CODE SECTION END
